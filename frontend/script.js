@@ -7,7 +7,7 @@ loginForm.addEventListener("submit", async (e) => {
     const password = document.getElementById("password").value;
 
     try {
-        const response = await fetch("http://localhost:3000/login", {
+        const response = await fetch("https://day17-user-dashboard-backend.onrender.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -40,7 +40,7 @@ async function getUsers() {
     const token = localStorage.getItem("token");
 
     try {
-        const response = await fetch("http://localhost:3000/users", {
+        const response = await fetch("https://day17-user-dashboard-backend.onrender.com/users", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -94,7 +94,7 @@ addUserForm.addEventListener("submit", async (e) => {
     const role = document.getElementById("userRole").value;
 
     try {
-        const response = await fetch("http://localhost:3000/users", {
+        const response = await fetch("https://day17-user-dashboard-backend.onrender.com/users", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -142,7 +142,7 @@ async function updateUser(id, name, email, role) {
     const token = localStorage.getItem("token");
 
     try {
-        const response = await fetch(`http://localhost:3000/users/${id}`, {
+        const response = await fetch(`https://day17-user-dashboard-backend.onrender.com/users/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -178,7 +178,7 @@ async function deleteUser(id) {
     const token = localStorage.getItem("token");
 
     try {
-        const response = await fetch(`http://localhost:3000/users/${id}`, {
+        const response = await fetch(`https://day17-user-dashboard-backend.onrender.com/users/${id}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -240,7 +240,7 @@ signupForm.addEventListener("submit", async (e) => {
     const password = document.getElementById("signupPassword").value;
 
     try {
-        const response = await fetch("http://localhost:3000/signup", {
+        const response = await fetch("https://day17-user-dashboard-backend.onrender.com/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
