@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+</head>
+
+<body>
+
+    <h1>User Dashboard</h1>
+    <h2>Users</h2>
+    <input type="text" id="searchUser" placeholder="Search User">
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody id="userTableBody">
+        </tbody>
+    </table>
+    <h2>Login</h2>
+
+    <form id="loginForm">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <p id="message"></p>
+    <button id="logoutButton">Logout</button>
+
+    <h2>Signup</h2>
+
+    <form id="signupForm">
+        <input type="text" id="signupName" placeholder="Name" required>
+        <input type="email" id="signupEmail" placeholder="Email" required>
+        <input type="password" id="signupPassword" placeholder="Password" required>
+        <button type="submit">Signup</button>
+    </form>
+
+    <p id="signupMessage"></p>
+    <h2>Add User</h2>
+
+    <form id="addUserForm">
+        <input type="text" id="userName" placeholder="Name" required>
+
+        <input type="email" id="userEmail" placeholder="Email" required>
+
+        <input type="password" id="userPassword" placeholder="Password" required>
+
+        <select id="userRole">
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+        </select>
+
+        <button type="submit">Add User</button>
+    </form>
+
+    <p id="addMessage"></p>
+    <script src="script.js"></script>
+</body>
+
+</html>
