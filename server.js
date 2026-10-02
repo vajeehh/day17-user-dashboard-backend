@@ -10,18 +10,29 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+const PORT = process.env.PORT || 3000;
+
+const MONGODB_URI =
+    process.env.MONGODB_URI ||
+    "mongodb://day17user:vajeehpochu378707@ac-y8vvtjd-shard-00-00.lesyemr.mongodb.net:27017,ac-y8vvtjd-shard-00-01.lesyemr.mongodb.net:27017,ac-y8vvtjd-shard-00-02.lesyemr.mongodb.net:27017/day17db?ssl=true&replicaSet=atlas-kirwml-shard-0&authSource=admin&appName=Cluster0&compressors=zlib";
+
+const JWT_SECRET =
+    process.env.JWT_SECRET || "secretkey";
+
 mongoose
-    .connect("mongodb://127.0.0.1:27017/day17db")
+    .connect(MONGODB_URI)
     .then(() => {
         console.log("MongoDB Connected");
 
-        app.listen(3000, () => {
-            console.log("Server running on http://localhost:3000");
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
         });
     })
     .catch((err) => {
         console.log("MongoDB Connection Error:", err);
     });
+
 
 app.post("/signup", async (req, res) => {
     try {
@@ -77,11 +88,8 @@ app.post("/login", async (req, res) => {
         }
 
         const token = jwt.sign(
-            {
-                id: user._id,
-                role: user.role
-            },
-            "secretkey",
+            { id: user._id, role: user.role },
+            JWT_SECRET,
             { expiresIn: "1h" }
         );
 
@@ -96,6 +104,7 @@ app.post("/login", async (req, res) => {
     }
 });
 
+
 function auth(req, res, next) {
     const token = req.header("Authorization")?.replace("Bearer ", "");
 
@@ -106,7 +115,7 @@ function auth(req, res, next) {
     }
 
     try {
-        const verified = jwt.verify(token, "secretkey");
+        const verified = jwt.verify(token, JWT_SECRET);
 
         req.user = verified;
 
@@ -117,6 +126,7 @@ function auth(req, res, next) {
         });
     }
 }
+
 
 app.get("/users", auth, async (req, res) => {
     try {
@@ -129,6 +139,7 @@ app.get("/users", auth, async (req, res) => {
         });
     }
 });
+
 
 app.post("/users", auth, async (req, res) => {
     try {
@@ -169,6 +180,7 @@ app.post("/users", auth, async (req, res) => {
     }
 });
 
+
 app.put("/users/:id", auth, async (req, res) => {
     try {
         const { name, email, role } = req.body;
@@ -199,6 +211,7 @@ app.put("/users/:id", auth, async (req, res) => {
         });
     }
 });
+
 
 app.delete("/users/:id", auth, async (req, res) => {
     try {
